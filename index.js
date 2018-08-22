@@ -24,7 +24,7 @@ function _registerListener(win, opts = {}) {
     const listener = (e, item) => {
 
         const itemUrl = decodeURIComponent(item.getURL());
-        const itemFilename = decodeURIComponent(item.getFilename());
+        const itemFilename = opts.filename || decodeURIComponent(item.getFilename());
 
         let queueItem = _popQueueItem(itemUrl);
 
@@ -99,7 +99,7 @@ const download = (options, callback) => {
     request.on('response', function (response) {
         request.abort();
 
-        const filename = decodeURIComponent(path.basename(options.url));
+        const filename = options.filename || decodeURIComponent(path.basename(options.url));
         const url = decodeURIComponent(options.url);
 
         queue.push({
