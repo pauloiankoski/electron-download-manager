@@ -24,13 +24,14 @@ function _registerListener(win, opts = {}) {
     const listener = (e, item) => {
 
         const itemUrl = decodeURIComponent(item.getURL());
-        const itemFilename = opts.filename || decodeURIComponent(item.getFilename());
+        const itemFilename = decodeURIComponent(item.getFilename());
 
         let queueItem = _popQueueItem(itemUrl);
 
         if (queueItem) {
             const folder = queueItem.downloadFolder || downloadFolder
-            const filePath = path.join(folder, queueItem.path, itemFilename);
+            const fileName = queueItem.filename || itemFilename
+            const filePath = path.join(folder, queueItem.path, fileName);
 
             const totalBytes = item.getTotalBytes();
 
