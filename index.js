@@ -11,7 +11,7 @@ let lastWindowCreated;
 const queue = [];
 
 const _popQueueItem = (url) => {
-    let queueItem = queue.find(item => item.url === url);
+    let queueItem = queue.find(item => item.url === url || item.url.replace('http://', 'https://') === url);
     queue.splice(queue.indexOf(queueItem), 1);
     return queueItem;
 };
